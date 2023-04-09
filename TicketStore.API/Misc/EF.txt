@@ -1,0 +1,3 @@
+dotnet ef migrations add Init --project ../TicketStore.Repository
+
+dotnet ef database update --project ../TicketStore.Repository

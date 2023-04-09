@@ -1,0 +1,21 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/TicketStore.API/bin
+/TicketStore.API/obj
+/TicketStore.API/appsettings.Development.json
+/TicketStore.API/appsettings.json
+/TicketStore.Domain/bin
+/TicketStore.Domain/obj
+/TicketStore.Identity/bin
+/TicketStore.Identity/obj
+/TicketStore.Reporitory.Abstractions/bin
+/TicketStore.Reporitory.Abstractions/obj
+/TicketStore.Repository/bin
+/TicketStore.Repository/obj
+/TicketStore.Service/bin
+/TicketStore.Service/obj
+/TicketStore.Service.Abstractions/bin
+/TicketStore.Service.Abstractions/obj
