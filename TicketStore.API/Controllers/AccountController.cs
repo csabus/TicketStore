@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TicketStore.API.Dto;
+using TicketStore.API.Dto.Account;
 using TicketStore.Domain;
+using TicketStore.Service.Abstractions;
 
 namespace TicketStore.API.Controllers
 {
@@ -12,19 +13,22 @@ namespace TicketStore.API.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
 
         public AccountController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            ITokenService tokenService,
             IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
             _mapper = mapper;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<ApplicationUser>> Register(RegisterUserRequest registerUserRequest)
+        public async Task<ActionResult<AuthenticatedUser>> Register(RegisterUserRequest registerUserRequest)
         {
             var applicationUser = _mapper.Map<RegisterUserRequest, ApplicationUser>(registerUserRequest);
 
@@ -32,27 +36,36 @@ namespace TicketStore.API.Controllers
             if(result.Succeeded)
             {
                 applicationUser = await _userManager.FindByNameAsync(applicationUser.Username);
-                return Ok(applicationUser);
+                
+                var authenticatedUser = _mapper.Map<ApplicationUser, AuthenticatedUser>(applicationUser);
+                authenticatedUser.Token = _tokenService.CreateToken(applicationUser);
+                
+                return Ok(authenticatedUser);
             } 
-
-            /*if (result.Succeeded)
-            {
-                applicationUserIdentity = await _userManager.FindByNameAsync(applicationUserCreate.Username ?? "");
-
-                var applicationUser = new ApplicationUser
-                {
-                    ApplicationUserId = applicationUserIdentity.ApplicationUserId,
-                    Username = applicationUserIdentity.Username,
-                    Email = applicationUserIdentity.Email,
-                    Fullname = applicationUserIdentity.Fullname,
-                    Token = _tokenService.CreateToken(applicationUserIdentity)
-                };
-
-                return Ok(applicationUser);
-            }*/
 
             return BadRequest(result.Errors);
         }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<AuthenticatedUser>> Login(LoginUserRequest loginUserRequest)
+        {
+            var applicationUser = await _userManager.FindByNameAsync(loginUserRequest.Username ?? "");
+
+            if (applicationUser != null)
+            {
+                var result = await _signInManager.CheckPasswordSignInAsync(applicationUser, loginUserRequest.Password, false);
+                if (result.Succeeded)
+                {
+                    var authenticatedUser = _mapper.Map<ApplicationUser, AuthenticatedUser>(applicationUser);
+                    authenticatedUser.Token = _tokenService.CreateToken(applicationUser);
+                    
+                    return Ok(authenticatedUser);
+                }
+            }
+
+            return Unauthorized("Invalid login attempt.");
+        }
+
 
     }
 }

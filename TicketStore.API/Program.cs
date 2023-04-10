@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using TicketStore.Domain;
 using TicketStore.Identity;
@@ -14,6 +15,9 @@ namespace TicketStore.API
     {
         public static void Main(string[] args)
         {
+            // to avoid long claim names
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -36,6 +40,7 @@ namespace TicketStore.API
                 .AddSignInManager<SignInManager<ApplicationUser>>();
 
             builder.Services.AddControllers();
+            builder.Services.AddCors();
 
             builder.Services
                 .AddAuthentication(opt =>
@@ -73,12 +78,16 @@ namespace TicketStore.API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.UseCors(opt => opt.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            } else
+            {
+                app.UseCors();
             }
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
 

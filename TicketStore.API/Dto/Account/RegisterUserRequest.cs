@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TicketStore.API.Dto
+namespace TicketStore.API.Dto.Account
 {
     public class RegisterUserRequest
     {
