@@ -25,6 +25,10 @@ namespace TicketStore.Service
                 new Claim(JwtRegisteredClaimNames.NameId, user.ApplicationUserId.ToString() ?? ""),
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.Username ?? "")
             };
+            foreach(var role in user.Roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role.NormalizedName ?? ""));
+            }
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 

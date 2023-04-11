@@ -16,5 +16,7 @@
 
         public string? PasswordHash { get; set; }
 
+        public ICollection<ApplicationRole> Roles { get; set; } = new List<ApplicationRole>();
+
     }
 }

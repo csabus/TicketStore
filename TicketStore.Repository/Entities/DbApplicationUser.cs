@@ -34,5 +34,12 @@ namespace TicketStore.Repository.Entities
         [Required]
         public string? PasswordHash { get; set; }
 
+        [ForeignKey("user_id")]
+        public virtual ICollection<DbApplicationRole> Roles { get; set; }
+
+        public DbApplicationUser()
+        {
+            this.Roles = new HashSet<DbApplicationRole>();
+        }
     }
 }

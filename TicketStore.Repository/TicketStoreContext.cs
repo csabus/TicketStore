@@ -6,10 +6,21 @@ namespace TicketStore.Repository
     public class TicketStoreContext : DbContext, ITicketStoreContext
     {
         public DbSet<DbApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<DbApplicationRole> Roles { get; set; }
 
         public TicketStoreContext(DbContextOptions<TicketStoreContext> options) : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<DbApplicationUser>()
+                            .HasMany<DbApplicationRole>(u => u.Roles)
+                            .WithMany(r => r.Users)
+                            .UsingEntity(ur => ur.ToTable("application_user_role"));
+        }
+
 
     }
 }

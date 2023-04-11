@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketStore.Repository;
 
@@ -11,9 +12,10 @@ using TicketStore.Repository;
 namespace TicketStore.Repository.Migrations
 {
     [DbContext(typeof(TicketStoreContext))]
-    partial class TicketStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230410153904_ApplicationRole1")]
+    partial class ApplicationRole1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace TicketStore.Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("DbApplicationRoleDbApplicationUser", b =>
-                {
-                    b.Property<Guid>("role_id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("user_id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("role_id", "user_id");
-
-                    b.HasIndex("user_id");
-
-                    b.ToTable("application_user_role", (string)null);
-                });
 
             modelBuilder.Entity("TicketStore.Repository.Entities.DbApplicationRole", b =>
                 {
@@ -103,21 +90,6 @@ namespace TicketStore.Repository.Migrations
                     b.HasKey("ApplicationUserId");
 
                     b.ToTable("application_user");
-                });
-
-            modelBuilder.Entity("DbApplicationRoleDbApplicationUser", b =>
-                {
-                    b.HasOne("TicketStore.Repository.Entities.DbApplicationRole", null)
-                        .WithMany()
-                        .HasForeignKey("role_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TicketStore.Repository.Entities.DbApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("user_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

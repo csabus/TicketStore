@@ -23,5 +23,22 @@ namespace TicketStore.Service
         {
             return _applUserRepository.GetByUsernameAsync(normalizedUsername, cancellationToken);
         }
+
+        public Task<IList<string>> GetRolesAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            var roles = user.Roles.Select(role => role.NormalizedName).ToList();
+            return Task.FromResult((IList<string>)roles);
+        }
+
+        public Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
+        {
+            return _applUserRepository.GetUsersInRoleAsync(roleName, cancellationToken);
+        }
+
+        public Task<bool> IsInRoleAsync(ApplicationUser user, string roleName, CancellationToken cancellationToken)
+        {
+            var result = user.Roles.Any(role => role.NormalizedName == roleName);
+            return Task.FromResult(result);
+        }
     }
 }

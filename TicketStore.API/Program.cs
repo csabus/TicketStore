@@ -36,6 +36,8 @@ namespace TicketStore.API
                     opt.Password.RequireNonAlphanumeric = false;
                 })
                 .AddUserStore<ApplicationUserStore>()
+                .AddRoles<ApplicationRole>()
+                .AddRoleStore<ApplicationRoleStore>()
                 .AddDefaultTokenProviders()
                 .AddSignInManager<SignInManager<ApplicationUser>>();
 

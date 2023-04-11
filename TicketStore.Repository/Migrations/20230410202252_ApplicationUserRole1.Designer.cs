@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketStore.Repository;
 
@@ -11,9 +12,10 @@ using TicketStore.Repository;
 namespace TicketStore.Repository.Migrations
 {
     [DbContext(typeof(TicketStoreContext))]
-    partial class TicketStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230410202252_ApplicationUserRole1")]
+    partial class ApplicationUserRole1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,13 +109,13 @@ namespace TicketStore.Repository.Migrations
 
             modelBuilder.Entity("DbApplicationRoleDbApplicationUser", b =>
                 {
-                    b.HasOne("TicketStore.Repository.Entities.DbApplicationRole", null)
+                    b.HasOne("TicketStore.Repository.Entities.DbApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("role_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TicketStore.Repository.Entities.DbApplicationUser", null)
+                    b.HasOne("TicketStore.Repository.Entities.DbApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("user_id")
                         .OnDelete(DeleteBehavior.Cascade)

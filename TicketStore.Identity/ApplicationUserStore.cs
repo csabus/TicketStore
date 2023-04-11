@@ -4,7 +4,10 @@ using TicketStore.Service.Abstractions;
 
 namespace TicketStore.Identity
 {
-    public class ApplicationUserStore : IUserStore<ApplicationUser>, IUserEmailStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>
+    public class ApplicationUserStore : IUserStore<ApplicationUser>, 
+        IUserEmailStore<ApplicationUser>, 
+        IUserPasswordStore<ApplicationUser>,
+        IUserRoleStore<ApplicationUser>
     {
         private readonly IApplicationUserService _applicationUserService;
 
@@ -83,36 +86,36 @@ namespace TicketStore.Identity
         public Task SetEmailAsync(ApplicationUser user, string email, CancellationToken cancellationToken)
         {
             user.Email = email;
-            return Task.FromResult(true);
+            return Task.CompletedTask;
         }
 
         public Task SetEmailConfirmedAsync(ApplicationUser user, bool confirmed, CancellationToken cancellationToken)
         {
-            return Task.FromResult(true);
+            return Task.CompletedTask;
         }
 
         public Task SetNormalizedEmailAsync(ApplicationUser user, string normalizedEmail, CancellationToken cancellationToken)
         {
             user.NormalizedEmail = normalizedEmail;
-            return Task.FromResult(true);
+            return Task.CompletedTask;
         }
 
         public Task SetNormalizedUserNameAsync(ApplicationUser user, string normalizedName, CancellationToken cancellationToken)
         {
             user.NormalizedUsername = normalizedName;
-            return Task.FromResult(true);
+            return Task.CompletedTask;
         }
 
         public Task SetPasswordHashAsync(ApplicationUser user, string passwordHash, CancellationToken cancellationToken)
         {
             user.PasswordHash = passwordHash;
-            return Task.FromResult(true);
+            return Task.CompletedTask;
         }
 
         public Task SetUserNameAsync(ApplicationUser user, string userName, CancellationToken cancellationToken)
         {
             user.Username = userName;
-            return Task.FromResult(true);
+            return Task.CompletedTask;
         }
 
         public Task<IdentityResult> UpdateAsync(ApplicationUser user, CancellationToken cancellationToken)
@@ -122,6 +125,31 @@ namespace TicketStore.Identity
         public void Dispose()
         {
             // nothing to dispose
+        }
+
+        public Task AddToRoleAsync(ApplicationUser user, string roleName, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RemoveFromRoleAsync(ApplicationUser user, string roleName, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<string>> GetRolesAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            return _applicationUserService.GetRolesAsync(user, cancellationToken);
+        }
+
+        public Task<bool> IsInRoleAsync(ApplicationUser user, string roleName, CancellationToken cancellationToken)
+        {
+            return _applicationUserService.IsInRoleAsync(user, roleName, cancellationToken);
+        }
+
+        public Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
+        {
+            return _applicationUserService.GetUsersInRoleAsync(roleName, cancellationToken);
         }
     }
 }

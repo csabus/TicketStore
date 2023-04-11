@@ -29,13 +29,28 @@ namespace TicketStore.Repository
 
         public Task<ApplicationUser> GetByUsernameAsync(string normalizedUsername, CancellationToken cancellationToken)
         {
-            var dbUser = _dbContext.ApplicationUsers.FirstOrDefault(u => u.NormalizedUsername == normalizedUsername);
+            var dbUser = _dbContext.ApplicationUsers
+                .Where(u => u.NormalizedUsername == normalizedUsername)
+                .Include(u => u.Roles)
+                .FirstOrDefault();
             if (dbUser != null)
             {
                 var applicationUser = _mapper.Map<DbApplicationUser, ApplicationUser>(dbUser);
                 return Task.FromResult(applicationUser);
             }
             return Task.FromResult(new ApplicationUser());
+        }
+
+        public Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
+        {
+            var role = _dbContext.Roles.Where(role => role.NormalizedName == roleName).FirstOrDefault();
+            if (role != null)
+            {
+                var dbUsers = role.Users;
+                var applicationUsers = _mapper.Map<ICollection<DbApplicationUser>, ICollection<ApplicationUser>>(dbUsers);
+                return Task.FromResult((IList<ApplicationUser>)applicationUsers);
+            }
+            return Task.FromResult((IList<ApplicationUser>)(new List<ApplicationUser>()));
         }
     }
 }

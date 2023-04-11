@@ -33,7 +33,8 @@ namespace TicketStore.API.Controllers
         }
         
         [HttpGet("auth")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Visitor")]
         public IEnumerable<WeatherForecast> GetAuth()
         {
             var applicationUserId = User.Claims.FirstOrDefault(i => i.Type == JwtRegisteredClaimNames.NameId)?.Value;
