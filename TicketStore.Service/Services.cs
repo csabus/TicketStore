@@ -8,7 +8,6 @@ namespace TicketStore.Service
         public static void RegisterServiceDependencies(this IServiceCollection services)
         {
             services.AddTransient<IApplicationUserService, ApplicationUserService>();
-            services.AddTransient<IApplicationRoleService, ApplicationRoleService>();
             services.AddTransient<ITokenService, TokenService>();
         }
 
