@@ -10,8 +10,15 @@ namespace TicketStore.Repository.Mapping
         {
             CreateMap<DbApplicationUser, ApplicationUser>();
             CreateMap<ApplicationUser, DbApplicationUser>();
+            
             CreateMap<DbApplicationRole, ApplicationRole>();
             CreateMap<ApplicationRole, DbApplicationRole>();
+
+            CreateMap<DbVenue, Venue>();
+            CreateMap<Venue, DbVenue>();
+
+            CreateMap<DbAddress, Address>();
+            CreateMap<Address, DbAddress>();
         }
     }
 }

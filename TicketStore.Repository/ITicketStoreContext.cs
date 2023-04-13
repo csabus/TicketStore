@@ -8,5 +8,7 @@ namespace TicketStore.Repository
         DbSet<DbApplicationUser> ApplicationUsers { get; set; }
 
         DbSet<DbApplicationRole> Roles { get; set; }
+
+        DbSet<DbVenue> Venues { get; set; }
     }
 }

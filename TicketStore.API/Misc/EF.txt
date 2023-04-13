@@ -1,3 +1,7 @@
 dotnet ef migrations add Init --project ../TicketStore.Repository
 
 dotnet ef database update --project ../TicketStore.Repository
+
+dotnet ef database update 20230410202657_ApplicationUserRole2 --project ../TicketStore.Repository
+
+dotnet ef migrations remove --project ../TicketStore.Repository

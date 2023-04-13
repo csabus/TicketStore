@@ -7,6 +7,7 @@ namespace TicketStore.Repository
     {
         public DbSet<DbApplicationUser> ApplicationUsers { get; set; }
         public DbSet<DbApplicationRole> Roles { get; set; }
+        public DbSet<DbVenue> Venues { get; set; }
 
         public TicketStoreContext(DbContextOptions<TicketStoreContext> options) : base(options)
         {
@@ -16,7 +17,7 @@ namespace TicketStore.Repository
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<DbApplicationUser>()
-                            .HasMany<DbApplicationRole>(u => u.Roles)
+                            .HasMany(u => u.Roles)
                             .WithMany(r => r.Users)
                             .UsingEntity(ur => ur.ToTable("application_user_role"));
         }
