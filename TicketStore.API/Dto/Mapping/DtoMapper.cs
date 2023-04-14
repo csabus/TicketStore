@@ -14,6 +14,8 @@ namespace TicketStore.API.DTO.Mapping
             CreateMap<ApplicationUser, AuthenticatedUser>();
             
             CreateMap<CreateVenueRequest, Venue>();
+            CreateMap<UpdateVenueRequest, Venue>();
+
             CreateMap<Venue, VenueDetails>();
 
             CreateMap<AddressDTO, Address>();

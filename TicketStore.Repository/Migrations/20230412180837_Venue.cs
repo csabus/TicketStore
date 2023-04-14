@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TicketStore.Repository.Migrations
 {
-    public partial class Venue : Migration
+    public partial class VenueCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -13,7 +13,7 @@ namespace TicketStore.Repository.Migrations
 {
     [DbContext(typeof(TicketStoreContext))]
     [Migration("20230412180837_Venue")]
-    partial class Venue
+    partial class VenueCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

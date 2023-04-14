@@ -36,5 +36,37 @@ namespace TicketStore.API.Controllers
             return BadRequest();
         }
 
+        [HttpPut]
+        [Authorize(Roles = "Admin, Creator")]
+        public async Task<ActionResult<VenueDetails>> Get(UpdateVenueRequest updateVenueRequest)
+        {
+            var venue = _mapper.Map<UpdateVenueRequest, Venue>(updateVenueRequest);
+            venue = await _venueService.UpdateAsync(venue);
+            if(venue != null)
+            {
+                return _mapper.Map<Venue, VenueDetails>(venue);
+            }
+            
+            return NotFound();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<VenueDetails>> Update(string id)
+        {
+            if (Guid.TryParseExact(id, "D", out var venueId))
+            {
+                var venue = await _venueService.GetByIdAsync(venueId);
+                if (venue != null)
+                {
+                    return _mapper.Map<Venue, VenueDetails>(venue);
+                }
+
+                return NotFound();
+            }
+
+            return BadRequest();
+        }
+
+
     }
 }

@@ -17,5 +17,15 @@ namespace TicketStore.Service
         {
             return _venueRepository.CreateAsync(venue);
         }
+
+        public Task<Venue> GetByIdAsync(Guid id)
+        {
+            return _venueRepository.GetByIdAsync(id);
+        }
+
+        public Task<Venue> UpdateAsync(Venue venue)
+        {
+            return _venueRepository.UpdateAsync(venue);
+        }
     }
 }
