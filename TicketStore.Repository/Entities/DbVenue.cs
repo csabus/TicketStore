@@ -22,5 +22,11 @@ namespace TicketStore.Repository.Entities
         [Required]
         public DbAddress Address { get; set; } = null!;
 
+        public virtual ICollection<DbEvent> Events { get; set; }
+
+        public DbVenue()
+        {
+            Events = new HashSet<DbEvent>(); ;
+        }
     }
 }

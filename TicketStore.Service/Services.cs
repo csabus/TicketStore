@@ -10,6 +10,7 @@ namespace TicketStore.Service
             services.AddTransient<IApplicationUserService, ApplicationUserService>();
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IVenueService, VenueService>();
+            services.AddTransient<IEventService, EventService>();
         }
 
     }

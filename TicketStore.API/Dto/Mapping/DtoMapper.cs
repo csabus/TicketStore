@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using TicketStore.API.Dto;
 using TicketStore.API.Dto.Account;
+using TicketStore.API.Dto.Event;
 using TicketStore.API.Dto.Venue;
 using TicketStore.Domain;
 
@@ -20,6 +21,9 @@ namespace TicketStore.API.DTO.Mapping
 
             CreateMap<AddressDTO, Address>();
             CreateMap<Address, AddressDTO>();
+
+            CreateMap<CreateEventRequest, Event>();
+            CreateMap<Event, EventDetails>();
         }
     }
 }

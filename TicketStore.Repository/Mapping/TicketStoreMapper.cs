@@ -19,6 +19,9 @@ namespace TicketStore.Repository.Mapping
 
             CreateMap<DbAddress, Address>();
             CreateMap<Address, DbAddress>();
+
+            CreateMap<DbEvent, Event>();
+            CreateMap<Event, DbEvent>();
         }
     }
 }

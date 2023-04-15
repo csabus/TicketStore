@@ -11,6 +11,7 @@ namespace TicketStore.Repository
             services.AddTransient<ITicketStoreContext, TicketStoreContext>();
             services.AddTransient<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddTransient<IVenueRepository, VenueRepository>();
+            services.AddTransient<IEventRepository, EventRepository>();
 
             services.AddAutoMapper(cfg =>
             {
