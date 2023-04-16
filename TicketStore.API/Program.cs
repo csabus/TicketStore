@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using TicketStore.API.Helpers;
 using TicketStore.Domain;
 using TicketStore.Identity;
 using TicketStore.Repository;
@@ -86,6 +87,8 @@ namespace TicketStore.API
                 app.UseCors();
             }
 
+            app.ConfigureExceptionHandler();
+            
             app.UseHttpsRedirection();
 
             app.UseAuthentication();

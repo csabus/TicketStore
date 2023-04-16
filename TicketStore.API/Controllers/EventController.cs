@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 using TicketStore.API.Dto.Event;
-using TicketStore.API.Dto.Venue;
 using TicketStore.Domain;
-using TicketStore.Repository.Entities;
 using TicketStore.Service.Abstractions;
 
 namespace TicketStore.API.Controllers
