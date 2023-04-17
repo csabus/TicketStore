@@ -23,6 +23,8 @@ namespace TicketStore.API.DTO.Mapping
             CreateMap<Address, AddressDTO>();
 
             CreateMap<CreateEventRequest, Event>();
+            CreateMap<UpdateEventRequest, Event>();
+            
             CreateMap<Event, EventDetails>();
         }
     }

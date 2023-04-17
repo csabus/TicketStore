@@ -27,5 +27,40 @@ namespace TicketStore.Repository
             
             return _mapper.Map<DbEvent, Event>(dbEvent);
         }
+
+        public async Task<Event> UpdateAsync(Event anEvent)
+        {
+            var dbEvent = _dbContext.Events.FirstOrDefault(e => e.Id == anEvent.Id);
+            if(dbEvent != null)
+            { 
+                dbEvent.Title = anEvent.Title;
+                dbEvent.Description = anEvent.Description;
+                dbEvent.DateTime = anEvent.DateTime;
+                dbEvent.Venue = _mapper.Map<Venue, DbVenue>(anEvent.Venue);
+
+                ((DbContext)_dbContext).Entry(dbEvent.Venue).State = EntityState.Unchanged;
+                await ((DbContext)_dbContext).SaveChangesAsync();
+
+                var result = _mapper.Map<DbEvent, Event>(dbEvent);
+                return result;
+            }
+
+            return null!;
+        }
+
+        public Task<Event> GetByIdAsync(Guid id)
+        {
+            var dbEvent = _dbContext.Events
+                .Where(e => e.Id == id)
+                .Include(e => e.Venue)
+                .FirstOrDefault();
+            if(dbEvent != null)
+            {
+                return Task.FromResult(_mapper.Map<DbEvent, Event>(dbEvent));
+            }
+
+            return Task.FromResult<Event>(null!);
+
+        }
     }
 }

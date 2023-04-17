@@ -38,7 +38,7 @@ namespace TicketStore.API.Controllers
 
         [HttpPut]
         [Authorize(Roles = "Admin, Creator")]
-        public async Task<ActionResult<VenueDetails>> Get(UpdateVenueRequest updateVenueRequest)
+        public async Task<ActionResult<VenueDetails>> Update(UpdateVenueRequest updateVenueRequest)
         {
             var venue = _mapper.Map<UpdateVenueRequest, Venue>(updateVenueRequest);
             venue = await _venueService.UpdateAsync(venue);
@@ -51,7 +51,7 @@ namespace TicketStore.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<VenueDetails>> Update(string id)
+        public async Task<ActionResult<VenueDetails>> Get(string id)
         {
             if (Guid.TryParseExact(id, "D", out var venueId))
             {
