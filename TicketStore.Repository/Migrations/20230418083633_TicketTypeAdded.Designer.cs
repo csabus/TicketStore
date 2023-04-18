@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketStore.Repository;
 
@@ -11,9 +12,10 @@ using TicketStore.Repository;
 namespace TicketStore.Repository.Migrations
 {
     [DbContext(typeof(TicketStoreContext))]
-    partial class TicketStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230418083633_TicketTypeAdded")]
+    partial class TicketTypeAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,17 +47,17 @@ namespace TicketStore.Repository.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasColumnName("description");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("name");
 
                     b.Property<string>("NormalizedName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("normalized_name");
 
                     b.HasKey("ApplicationRoleId");
@@ -72,22 +74,22 @@ namespace TicketStore.Repository.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("email");
 
                     b.Property<string>("Fullname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("fullname");
 
                     b.Property<string>("NormalizedEmail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("normalized_email");
 
                     b.Property<string>("NormalizedUsername")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("normalized_username");
 
                     b.Property<string>("PasswordHash")
@@ -97,7 +99,7 @@ namespace TicketStore.Repository.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("username");
 
                     b.HasKey("ApplicationUserId");
@@ -118,12 +120,12 @@ namespace TicketStore.Repository.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("varchar(max)")
                         .HasColumnName("description");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(150)")
+                        .HasColumnType("varchar(150)")
                         .HasColumnName("title");
 
                     b.Property<Guid>("venue_id")
@@ -138,24 +140,24 @@ namespace TicketStore.Repository.Migrations
 
             modelBuilder.Entity("TicketStore.Repository.Entities.DbTicketType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("ApplicationRoleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(255)")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("description");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasColumnName("name");
 
                     b.Property<Guid>("venu_id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("ApplicationRoleId");
 
                     b.HasIndex("venu_id");
 
@@ -171,12 +173,12 @@ namespace TicketStore.Repository.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(255)")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("description");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasColumnName("name");
 
                     b.HasKey("Id");
@@ -230,22 +232,22 @@ namespace TicketStore.Repository.Migrations
 
                             b1.Property<string>("City")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(100)")
+                                .HasColumnType("varchar(100)")
                                 .HasColumnName("address_city");
 
                             b1.Property<string>("Country")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(50)")
+                                .HasColumnType("varchar(50)")
                                 .HasColumnName("address_country");
 
                             b1.Property<string>("Street")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(150)")
+                                .HasColumnType("varchar(150)")
                                 .HasColumnName("address_street");
 
                             b1.Property<string>("ZipCode")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(10)")
+                                .HasColumnType("varchar(10)")
                                 .HasColumnName("address_zip_code");
 
                             b1.HasKey("DbVenueId");
