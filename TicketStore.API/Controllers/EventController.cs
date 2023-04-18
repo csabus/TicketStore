@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TicketStore.API.Dto.Event;
-using TicketStore.API.Dto.Venue;
 using TicketStore.Domain;
 using TicketStore.Service.Abstractions;
 

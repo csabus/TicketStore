@@ -9,6 +9,7 @@ namespace TicketStore.Repository
         public DbSet<DbApplicationRole> Roles { get; set; }
         public DbSet<DbVenue> Venues { get; set; }
         public DbSet<DbEvent> Events { get; set; }
+        public DbSet<DbTicketType> TicketTypes { get; set; }
 
         public TicketStoreContext(DbContextOptions<TicketStoreContext> options) : base(options)
         {

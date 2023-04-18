@@ -2,6 +2,7 @@
 using TicketStore.API.Dto;
 using TicketStore.API.Dto.Account;
 using TicketStore.API.Dto.Event;
+using TicketStore.API.Dto.Ticket;
 using TicketStore.API.Dto.Venue;
 using TicketStore.Domain;
 
@@ -26,6 +27,11 @@ namespace TicketStore.API.DTO.Mapping
             CreateMap<UpdateEventRequest, Event>();
             
             CreateMap<Event, EventDetails>();
+
+            CreateMap<CreateTicketTypeRequest, TicketType>();
+            CreateMap<UpdateTicketTypeRequest, TicketType>();
+
+            CreateMap<TicketType, TicketTypeDetails>();
         }
     }
 }

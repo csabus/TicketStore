@@ -11,7 +11,7 @@ namespace TicketStore.Service
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IVenueService, VenueService>();
             services.AddTransient<IEventService, EventService>();
+            services.AddTransient<ITicketService, TicketService>();
         }
-
     }
 }
