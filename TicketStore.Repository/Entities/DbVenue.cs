@@ -11,11 +11,11 @@ namespace TicketStore.Repository.Entities
         [Column("id")]
         public Guid Id { get; set; }
 
-        [Column("name", TypeName = "varchar(100)")]
+        [Column("name", TypeName = "nvarchar(100)")]
         [Required]
         public string Name { get; set; } = null!;
 
-        [Column("description", TypeName = "varchar(255)")]
+        [Column("description", TypeName = "nvarchar(255)")]
         [Required]
         public string Description { get; set; } = null!;
 
@@ -23,10 +23,13 @@ namespace TicketStore.Repository.Entities
         public DbAddress Address { get; set; } = null!;
 
         public virtual ICollection<DbEvent> Events { get; set; }
+        
+        public virtual ICollection<DbTicketType> TicketTypes { get; set; }
 
         public DbVenue()
         {
             Events = new HashSet<DbEvent>(); ;
+            TicketTypes = new HashSet<DbTicketType>();
         }
     }
 }

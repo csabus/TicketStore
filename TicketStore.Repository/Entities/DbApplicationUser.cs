@@ -10,23 +10,23 @@ namespace TicketStore.Repository.Entities
         [Column("id")]
         public Guid ApplicationUserId { get; set; }
 
-        [Column("username", TypeName ="varchar(50)")]
+        [Column("username", TypeName ="nvarchar(50)")]
         [Required]
         public string? Username { get; set; }
 
-        [Column("normalized_username", TypeName ="varchar(50)")]
+        [Column("normalized_username", TypeName ="nvarchar(50)")]
         [Required]
         public string? NormalizedUsername { get; set; }
 
-        [Column("email", TypeName = "varchar(50)")]
+        [Column("email", TypeName = "nvarchar(50)")]
         [Required]
         public string? Email { get; set; }
 
-        [Column("normalized_email", TypeName = "varchar(50)")]
+        [Column("normalized_email", TypeName = "nvarchar(50)")]
         [Required]
         public string? NormalizedEmail { get; set; }
 
-        [Column("fullname", TypeName = "varchar(50)")]
+        [Column("fullname", TypeName = "nvarchar(50)")]
         [Required]
         public string? Fullname { get; set; }
 

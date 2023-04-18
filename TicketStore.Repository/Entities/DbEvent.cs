@@ -10,11 +10,11 @@ namespace TicketStore.Repository.Entities
         [Column("id")]
         public Guid Id { get; set; }
 
-        [Column("title", TypeName = "varchar(150)")]
+        [Column("title", TypeName = "nvarchar(150)")]
         [Required]
         public string Title { get; set; } = null!;
 
-        [Column("description", TypeName = "varchar(max)")]
+        [Column("description", TypeName = "nvarchar(max)")]
         [Required]
         public string Description { get; set; } = null!;
 

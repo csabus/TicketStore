@@ -10,15 +10,15 @@ namespace TicketStore.Repository.Entities
         [Column("id")]
         public Guid ApplicationRoleId { get; set; }
 
-        [Column("name", TypeName = "varchar(50)")]
+        [Column("name", TypeName = "nvarchar(50)")]
         [Required]
         public string? Name { get; set; }
 
-        [Column("normalized_name", TypeName = "varchar(50)")]
+        [Column("normalized_name", TypeName = "nvarchar(50)")]
         [Required]
         public string? NormalizedName { get; set; }
 
-        [Column("description", TypeName = "varchar(100)")]
+        [Column("description", TypeName = "nvarchar(100)")]
         public string? Description { get; set; }
 
         [ForeignKey("role_id")]
