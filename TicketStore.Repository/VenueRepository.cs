@@ -55,5 +55,21 @@ namespace TicketStore.Repository
             
             return Task.FromResult<Venue>(null!);
         }
+
+        public Task<PagedResult<Venue>> GetPagedAsync(Paging paging)
+        {
+            var dbVenueList = _dbContext.Venues
+                .Skip(paging.Page * paging.PageSize)
+                .Take(paging.PageSize)
+                .ToList();
+            var pagedResult = new PagedResult<Venue>
+            {
+                Result = _mapper.Map<List<DbVenue>, List<Venue>>(dbVenueList),
+                TotalCount = _dbContext.Venues.Count(),
+                Page = paging.Page,
+                PageSize = paging.PageSize
+            };
+            return Task.FromResult(pagedResult);
+        }
     }
 }

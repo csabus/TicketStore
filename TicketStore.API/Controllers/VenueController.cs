@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TicketStore.API.Dto;
 using TicketStore.API.Dto.Venue;
 using TicketStore.Domain;
 using TicketStore.Service.Abstractions;
@@ -65,6 +66,15 @@ namespace TicketStore.API.Controllers
             }
 
             return BadRequest();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<PagedResult<VenueDetails>>> GetAll([FromQuery] PagingRequest? pagingRequest)
+        {
+            var paging = _mapper.Map<PagingRequest, Paging>(pagingRequest ?? new PagingRequest());
+            var result = await _venueService.GetPagedAsync(paging);
+
+            return _mapper.Map<PagedResult<Venue>, PagedResult<VenueDetails>>(result);
         }
 
 

@@ -9,5 +9,7 @@ namespace TicketStore.Service.Abstractions
         public Task<Venue> UpdateAsync(Venue venue);
 
         public Task<Venue> GetByIdAsync(Guid id);
+
+        public Task<PagedResult<Venue>> GetPagedAsync(Paging paging);
     }
 }

@@ -27,5 +27,10 @@ namespace TicketStore.Service
         {
             return _venueRepository.UpdateAsync(venue);
         }
+        
+        public Task<PagedResult<Venue>> GetPagedAsync(Paging paging)
+        {
+            return _venueRepository.GetPagedAsync(paging);
+        }
     }
 }
