@@ -23,6 +23,11 @@ namespace TicketStore.Service
             return _eventRepository.GetByIdAsync(id);
         }
 
+        public Task<PagedResult<Event>> GetPagedAsync(Paging paging)
+        {
+            return _eventRepository.GetPagedAsync(paging);
+        }
+
         public Task<Event> UpdateAsync(Event anEvent)
         {
             return _eventRepository.UpdateAsync(anEvent);

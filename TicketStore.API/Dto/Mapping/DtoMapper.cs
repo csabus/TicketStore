@@ -17,6 +17,7 @@ namespace TicketStore.API.DTO.Mapping
                 .ForMember(p => p.PageSize, opt => opt.NullSubstitute(20));
 
             CreateMap<PagedResult<Venue>, PagedResult<VenueDetails>>();
+            CreateMap<PagedResult<Event>, PagedResult<EventDetails>>();
 
             CreateMap<RegisterUserRequest, ApplicationUser>();
             CreateMap<ApplicationUser, AuthenticatedUser>();

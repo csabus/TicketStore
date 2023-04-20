@@ -10,5 +10,7 @@ namespace TicketStore.Service.Abstractions
 
         public Task<Event> GetByIdAsync(Guid id);
 
+        public Task<PagedResult<Event>> GetPagedAsync(Paging paging);
+
     }
 }
