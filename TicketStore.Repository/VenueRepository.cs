@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TicketStore.Domain;
 using TicketStore.Repository.Abstractions;
 using TicketStore.Repository.Entities;
-using TicketStore.Repository.Migrations;
+using System.Linq.Dynamic.Core;
 
 namespace TicketStore.Repository
 {
@@ -56,13 +56,14 @@ namespace TicketStore.Repository
             return Task.FromResult<Venue>(null!);
         }
 
-        public Task<PagedResult<Venue>> GetPagedAsync(Paging paging)
+        public Task<Domain.PagedResult<Venue>> GetPagedAsync(Paging paging)
         {
             var dbVenueList = _dbContext.Venues
                 .Skip(paging.Page * paging.PageSize)
                 .Take(paging.PageSize)
+                .OrderBy(paging.GetOrderByString("name"))
                 .ToList();
-            var pagedResult = new PagedResult<Venue>
+            var pagedResult = new Domain.PagedResult<Venue>
             {
                 Result = _mapper.Map<List<DbVenue>, List<Venue>>(dbVenueList),
                 TotalCount = _dbContext.Venues.Count(),

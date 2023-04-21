@@ -9,5 +9,10 @@ namespace TicketStore.API.Dto
         
         [Range(1, 20)]
         public int? PageSize { get; set; }
+
+        public string? OrderBy { get; set; }
+
+        public bool? IsDescending { get; set; }
+
     }
 }
