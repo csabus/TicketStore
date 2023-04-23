@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using TicketStore.Domain;
+using TicketStore.Domain.Enum;
 using TicketStore.Repository.Entities;
 
 namespace TicketStore.Repository.Mapping
@@ -25,6 +26,18 @@ namespace TicketStore.Repository.Mapping
 
             CreateMap<DbTicketType, TicketType>();
             CreateMap<TicketType, DbTicketType>();
+
+            CreateMap<DbTicket, Ticket>()
+                .ForMember(
+                    t => t.Status,
+                    ex => ex.MapFrom(t => (TicketStatus) Enum.ToObject(typeof(TicketStatus), t.Status))
+                );
+            CreateMap<Ticket, DbTicket>()
+                .ForMember(
+                    t => t.Status,
+                    ex => ex.MapFrom(t => (int) t.Status)
+                );
+
         }
     }
 }
