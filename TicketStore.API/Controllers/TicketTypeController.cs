@@ -11,13 +11,13 @@ namespace TicketStore.API.Controllers
     [ApiController]
     public class TicketTypeController : ControllerBase
     {
-        private readonly ITicketService _ticketService;
+        private readonly ITicketTypeService _ticketTypeService;
         private readonly IVenueService _venueService;
         private readonly IMapper _mapper;
 
-        public TicketTypeController(ITicketService ticketService, IVenueService venueService, IMapper mapper)
+        public TicketTypeController(ITicketTypeService ticketService, IVenueService venueService, IMapper mapper)
         {
-            _ticketService = ticketService;
+            _ticketTypeService = ticketService;
             _venueService = venueService;
             _mapper = mapper;
         }
@@ -31,7 +31,7 @@ namespace TicketStore.API.Controllers
             if (venue != null)
             {
                 ticketType.Venue = venue;
-                ticketType = await _ticketService.CreateTypeAsync(ticketType);
+                ticketType = await _ticketTypeService.CreateAsync(ticketType);
                 return _mapper.Map<TicketType, TicketTypeDetails>(ticketType);
             }
 
@@ -43,7 +43,7 @@ namespace TicketStore.API.Controllers
         {
             if (Guid.TryParseExact(id, "D", out var ticketTypeId))
             {
-                var ticketType = await _ticketService.GetTypeByIdAsync(ticketTypeId);
+                var ticketType = await _ticketTypeService.GetByIdAsync(ticketTypeId);
                 if (ticketType != null)
                 {
                     return _mapper.Map<TicketType, TicketTypeDetails>(ticketType);
@@ -64,7 +64,7 @@ namespace TicketStore.API.Controllers
             if (venue != null)
             {
                 ticketType.Venue = venue;
-                ticketType = await _ticketService.UpdateTypeAsync(ticketType);
+                ticketType = await _ticketTypeService.UpdateAsync(ticketType);
                 if (ticketType != null)
                 {
                     return _mapper.Map<TicketType, TicketTypeDetails>(ticketType);
