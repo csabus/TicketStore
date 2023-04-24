@@ -5,6 +5,7 @@ using TicketStore.API.Dto.Event;
 using TicketStore.API.Dto.Ticket;
 using TicketStore.API.Dto.Venue;
 using TicketStore.Domain;
+using TicketStore.Domain.Enum;
 
 namespace TicketStore.API.DTO.Mapping
 {
@@ -39,6 +40,22 @@ namespace TicketStore.API.DTO.Mapping
             CreateMap<UpdateTicketTypeRequest, TicketType>();
 
             CreateMap<TicketType, TicketTypeDetails>();
+
+            CreateMap<CreateTicketsRequest, Ticket>()
+                .ForMember(
+                    t => t.IsAvailable, 
+                    opt => opt.NullSubstitute(true))
+                .ForMember(
+                    t => t.Status,
+                    opt => opt.MapFrom(t => string.IsNullOrEmpty(t.Status) ? 
+                                                TicketStatus.Available : 
+                                                Enum.Parse(typeof(TicketStatus), t.Status!, true)))
+                .ForMember(
+                    t => t.Event, 
+                    opt => opt.MapFrom(t => new Event() { Id = t.EventId!.Value }))
+                .ForMember(
+                    t => t.Type, 
+                    opt => opt.MapFrom(t => new TicketType() { Id = t.TicketTypeId!.Value }));
         }
     }
 }
