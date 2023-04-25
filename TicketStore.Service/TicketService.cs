@@ -13,19 +13,9 @@ namespace TicketStore.Service
             _ticketRepository = ticketRepository;
         }
 
-        public Task<TicketType> CreateTypeAsync(TicketType ticketType)
+        public Task<bool> CreateAsync(Ticket ticket, int count)
         {
-            return _ticketRepository.CreateTypeAsync(ticketType);
-        }
-
-        public Task<TicketType> GetTypeByIdAsync(Guid id)
-        {
-            return _ticketRepository.GetTypeByIdAsync(id);
-        }
-
-        public Task<TicketType> UpdateTypeAsync(TicketType ticketType)
-        {
-            return _ticketRepository.UpdateypeAsync(ticketType);
+            return _ticketRepository.CreateAsync(ticket, count);
         }
     }
 }

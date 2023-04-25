@@ -9,7 +9,7 @@ namespace TicketStore.Repository
     public class TicketRepository : ITicketRepository
     {
         private readonly ITicketStoreContext _dbContext;
-        private readonly IMapper _mapper;
+        public readonly IMapper _mapper;
 
         public TicketRepository(ITicketStoreContext dbContext, IMapper mapper)
         {
@@ -17,47 +17,31 @@ namespace TicketStore.Repository
             _mapper = mapper;
         }
 
-        public async Task<TicketType> CreateTypeAsync(TicketType ticketType)
+        public async Task<bool> CreateAsync(Ticket ticket, int count)
         {
-            var dbTicketType = _mapper.Map<TicketType, DbTicketType>(ticketType);
-            await _dbContext.TicketTypes.AddAsync(dbTicketType);
+            var dbEvent = _dbContext.Events.FirstOrDefault(e => e.Id == ticket.Event.Id);
+            var dbTicketType = _dbContext.TicketTypes.FirstOrDefault(t => t.Id == ticket.Type.Id);
             
-            ((DbContext)_dbContext).Entry(dbTicketType.Venue).State = EntityState.Unchanged;
-            await ((DbContext)_dbContext).SaveChangesAsync();
-
-            return _mapper.Map<DbTicketType, TicketType>(dbTicketType);
-        }
-
-        public Task<TicketType> GetTypeByIdAsync(Guid id)
-        {
-            var dbTicketType = _dbContext.TicketTypes
-                .Where(t => t.Id == id)
-                .Include(t => t.Venue)
-                .FirstOrDefault();
-            if(dbTicketType != null)
+            if(dbEvent != null && dbTicketType != null)
             {
-                return Task.FromResult(_mapper.Map<DbTicketType, TicketType>(dbTicketType));
-            }
+                for(var i=0; i<count; i++)
+                {
+                    var dbTicket = _mapper.Map<Ticket, DbTicket>(ticket);
+                    dbTicket.Id = Guid.NewGuid();
+                    dbTicket.Event = dbEvent;
+                    dbTicket.Type = dbTicketType;
 
-            return Task.FromResult<TicketType>(null!);
+                    await _dbContext.Tickets.AddAsync(dbTicket);
+                    ((DbContext)_dbContext).Entry(dbTicket.Event).State = EntityState.Unchanged;
+                    ((DbContext)_dbContext).Entry(dbTicket.Type).State = EntityState.Unchanged;
+                    await ((DbContext)_dbContext).SaveChangesAsync();
+                }
+
+                return true;
+            }
+            
+            return false;
         }
 
-        public async Task<TicketType> UpdateypeAsync(TicketType ticketType)
-        {
-            var dbTicketType = _dbContext.TicketTypes.FirstOrDefault(e => e.Id == ticketType.Id);
-            if (dbTicketType != null)
-            {
-                dbTicketType.Name = ticketType.Name;
-                dbTicketType.Description = ticketType.Description;
-                dbTicketType.Venue = _mapper.Map<Venue, DbVenue>(ticketType.Venue);
-
-                ((DbContext)_dbContext).Entry(dbTicketType.Venue).State = EntityState.Unchanged;
-                await((DbContext)_dbContext).SaveChangesAsync();
-
-                return _mapper.Map<DbTicketType, TicketType>(dbTicketType);
-            }
-
-            return null!;
-        }
     }
 }

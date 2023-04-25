@@ -1,4 +1,5 @@
-﻿using TicketStore.API.DTO.Mapping;
+﻿using TicketStore.API.ActionFilters;
+using TicketStore.API.DTO.Mapping;
 
 namespace TicketStore.API
 {
@@ -10,6 +11,8 @@ namespace TicketStore.API
             {
                 cfg.AddProfile<DtoMapper>();
             });
+
+            services.AddScoped<ValidateTicketCreateAttribute>();
         }
     }
 }

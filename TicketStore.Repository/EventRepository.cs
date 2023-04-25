@@ -49,7 +49,7 @@ namespace TicketStore.Repository
             return null!;
         }
 
-        public Task<Event> GetByIdAsync(Guid id)
+        public Task<Event> GetByIdAsync(Guid? id)
         {
             var dbEvent = _dbContext.Events
                 .Where(e => e.Id == id)

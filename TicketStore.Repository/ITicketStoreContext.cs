@@ -14,5 +14,9 @@ namespace TicketStore.Repository
         DbSet<DbEvent> Events { get; set; }
 
         DbSet<DbTicketType> TicketTypes { get; set; }
+
+        DbSet<DbTicketStatus> TicketStates { get; set; }
+
+        DbSet<DbTicket> Tickets { get; set; } 
     }
 }
