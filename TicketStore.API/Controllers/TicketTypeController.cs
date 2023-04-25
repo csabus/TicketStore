@@ -39,20 +39,15 @@ namespace TicketStore.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TicketTypeDetails>> Get(string id)
+        public async Task<ActionResult<TicketTypeDetails>> Get(Guid id)
         {
-            if (Guid.TryParseExact(id, "D", out var ticketTypeId))
+            var ticketType = await _ticketTypeService.GetByIdAsync(id);
+            if (ticketType != null)
             {
-                var ticketType = await _ticketTypeService.GetByIdAsync(ticketTypeId);
-                if (ticketType != null)
-                {
-                    return _mapper.Map<TicketType, TicketTypeDetails>(ticketType);
-                }
-
-                return NotFound();
+                return _mapper.Map<TicketType, TicketTypeDetails>(ticketType);
             }
 
-            return BadRequest();
+            return NotFound();
         }
 
         [HttpPut]

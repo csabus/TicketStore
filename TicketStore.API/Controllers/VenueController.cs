@@ -52,20 +52,15 @@ namespace TicketStore.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<VenueDetails>> Get(string id)
+        public async Task<ActionResult<VenueDetails>> Get(Guid id)
         {
-            if (Guid.TryParseExact(id, "D", out var venueId))
+            var venue = await _venueService.GetByIdAsync(id);
+            if (venue != null)
             {
-                var venue = await _venueService.GetByIdAsync(venueId);
-                if (venue != null)
-                {
-                    return _mapper.Map<Venue, VenueDetails>(venue);
-                }
-
-                return NotFound();
+                return _mapper.Map<Venue, VenueDetails>(venue);
             }
 
-            return BadRequest();
+            return NotFound();
         }
 
         [HttpGet]
