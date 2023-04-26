@@ -8,5 +8,7 @@ namespace TicketStore.Service.Abstractions
 
         Task<Ticket> GetByIdAsync(Guid id);
 
+        Task<bool> ValidateAsync(Guid ticketId, Guid eventId);
+
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TicketStore.API.ActionFilters;
+using TicketStore.API.Dto;
 using TicketStore.API.Dto.Ticket;
 using TicketStore.Domain;
 using TicketStore.Service.Abstractions;
@@ -47,6 +48,14 @@ namespace TicketStore.API.Controllers
             }
             
             return NotFound();
+        }
+
+        [HttpGet("validate")]
+        public async Task<ActionResult<bool>> Validate([FromQuery] TicketValidationRequest request)
+        {
+            var result = await _ticketService.ValidateAsync(request.TicketId ?? Guid.Empty, request.EventId ?? Guid.Empty);
+
+            return Ok(result);
         }
     }
 }

@@ -7,5 +7,7 @@ namespace TicketStore.Repository.Abstractions
         Task<bool> CreateAsync(Ticket ticket, int count);
 
         Task<Ticket> GetByIdAsync(Guid id);
+
+        Task<bool> ValidateAsync(Guid ticketId, Guid eventId);
     }
 }

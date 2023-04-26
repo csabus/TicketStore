@@ -22,5 +22,10 @@ namespace TicketStore.Service
         {
             return _ticketRepository.GetByIdAsync(id);
         }
+
+        public Task<bool> ValidateAsync(Guid ticketId, Guid eventId)
+        {
+            return _ticketRepository.ValidateAsync(ticketId, eventId);
+        }
     }
 }

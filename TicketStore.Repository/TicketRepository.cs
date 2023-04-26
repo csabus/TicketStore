@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TicketStore.Domain;
+using TicketStore.Domain.Enum;
 using TicketStore.Repository.Abstractions;
 using TicketStore.Repository.Entities;
 
@@ -58,6 +59,20 @@ namespace TicketStore.Repository
 
             return Task.FromResult<Ticket>(null!);
 
+        }
+
+        public Task<bool> ValidateAsync(Guid ticketId, Guid eventId)
+        {
+            var dbTicket = _dbContext.Tickets
+                .Where(t => t.Id == ticketId)
+                .Include(t => t.Event)
+                .FirstOrDefault();
+
+            var isValid = dbTicket != null && 
+                dbTicket.Event.Id == eventId && 
+                dbTicket.Status == (int)TicketStatus.Sold;
+
+           return Task.FromResult(isValid);
         }
     }
 }
