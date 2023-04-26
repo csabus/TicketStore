@@ -12,15 +12,11 @@ namespace TicketStore.API.Controllers
     [ApiController]
     public class TicketController : ControllerBase
     {
-        private readonly IEventService _eventService;
-        private readonly IVenueService _venueService;
         private readonly ITicketService _ticketService;
         private readonly IMapper _mapper;
 
-        public TicketController(IEventService eventService, IVenueService venueService, ITicketService ticketService, IMapper mapper)
+        public TicketController(ITicketService ticketService, IMapper mapper)
         {
-            _eventService = eventService;
-            _venueService = venueService;
             _ticketService = ticketService;
             _mapper = mapper;
         }
@@ -39,6 +35,18 @@ namespace TicketStore.API.Controllers
             }
 
             return BadRequest();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TicketDetails>> Get(Guid id)
+        {
+            var ticket = await _ticketService.GetByIdAsync(id);
+            if(ticket != null)
+            {
+                return _mapper.Map<Ticket, TicketDetails>(ticket);
+            }
+            
+            return NotFound();
         }
     }
 }

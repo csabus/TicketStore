@@ -17,5 +17,10 @@ namespace TicketStore.Service
         {
             return _ticketRepository.CreateAsync(ticket, count);
         }
+
+        public Task<Ticket> GetByIdAsync(Guid id)
+        {
+            return _ticketRepository.GetByIdAsync(id);
+        }
     }
 }

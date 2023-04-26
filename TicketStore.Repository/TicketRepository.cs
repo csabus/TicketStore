@@ -43,5 +43,21 @@ namespace TicketStore.Repository
             return false;
         }
 
+        public Task<Ticket> GetByIdAsync(Guid id)
+        {
+            var dbTicket = _dbContext.Tickets
+                .Where(t => t.Id == id)
+                .Include(t => t.Event)
+                .Include(t => t.Type)
+                .FirstOrDefault();
+            
+            if (dbTicket != null)
+            {
+                return Task.FromResult(_mapper.Map<DbTicket, Ticket>(dbTicket));
+            }
+
+            return Task.FromResult<Ticket>(null!);
+
+        }
     }
 }

@@ -56,6 +56,8 @@ namespace TicketStore.API.DTO.Mapping
                 .ForMember(
                     t => t.Type, 
                     opt => opt.MapFrom(t => new TicketType() { Id = t.TicketTypeId!.Value }));
+
+            CreateMap<Ticket, TicketDetails>();
         }
     }
 }
