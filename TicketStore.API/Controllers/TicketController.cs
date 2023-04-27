@@ -57,5 +57,30 @@ namespace TicketStore.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost("buy")]
+        public async Task<ActionResult<BuyTicketResponse>> Buy(BuyTicketRequest request)
+        {
+            var ticket = await _ticketService.BuyAsync(request.EventId ?? Guid.Empty, request.TicketTypeId ?? Guid.Empty);
+            BuyTicketResponse response;
+            if (ticket != null)
+            {
+                response = new BuyTicketResponse()
+                {
+                    IsSuccess = true,
+                    Message = "Ok",
+                    Ticket = _mapper.Map<Ticket, TicketDetails>(ticket)
+                };
+            }
+            else
+            {
+                response = new BuyTicketResponse()
+                {
+                    IsSuccess = false,
+                    Message = "Error"
+                };
+            }
+            return Ok(response);
+        }
     }
 }

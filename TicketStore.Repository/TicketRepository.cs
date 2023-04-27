@@ -58,7 +58,6 @@ namespace TicketStore.Repository
             }
 
             return Task.FromResult<Ticket>(null!);
-
         }
 
         public Task<bool> ValidateAsync(Guid ticketId, Guid eventId)
@@ -73,6 +72,40 @@ namespace TicketStore.Repository
                 dbTicket.Status == (int)TicketStatus.Sold;
 
            return Task.FromResult(isValid);
+        }
+
+        public async Task<Ticket> BuyAsync(Guid eventId, Guid ticketTypeId)
+        {
+            using var tranaction = ((DbContext)_dbContext).Database.BeginTransaction();
+            try
+            {
+                var dbTicket = _dbContext.Tickets
+                    .Where(t => t.Event.Id == eventId)
+                    .Where(t => t.Type.Id == ticketTypeId)
+                    .Where(t => t.Status == (int)TicketStatus.Available)
+                    .Include(t => t.Event)
+                    .Include(t => t.Type)
+                    .FirstOrDefault();
+
+                if(dbTicket != null)
+                {
+                    dbTicket.Status = (int)TicketStatus.Sold;
+                    
+                    ((DbContext)_dbContext).Entry(dbTicket.Event).State = EntityState.Unchanged;
+                    ((DbContext)_dbContext).Entry(dbTicket.Type).State = EntityState.Unchanged;
+                    await((DbContext)_dbContext).SaveChangesAsync();
+
+                    tranaction.Commit();
+                    
+                    return _mapper.Map<DbTicket, Ticket>(dbTicket);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return null!;
         }
     }
 }
