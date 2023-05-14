@@ -82,5 +82,17 @@ namespace TicketStore.API.Controllers
             }
             return Ok(response);
         }
+
+        [HttpGet("available/{eventId}")]
+        public async Task<ActionResult<AvailableTicketsDetails>> GetAvalialbeTickets(Guid eventId)
+        {
+            var availableTickets = await _ticketService.GetAvailableTicketsAsync(eventId);
+            if(availableTickets != null)
+            {
+                return _mapper.Map<AvailableTickets, AvailableTicketsDetails>(availableTickets);
+            }
+
+            return NotFound();
+        }
     }
 }

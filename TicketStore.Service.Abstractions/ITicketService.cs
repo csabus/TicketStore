@@ -12,5 +12,7 @@ namespace TicketStore.Service.Abstractions
 
         Task<Ticket> BuyAsync(Guid eventId, Guid ticketTypeId);
 
+        Task<AvailableTickets> GetAvailableTicketsAsync(Guid eventId);
+
     }
 }

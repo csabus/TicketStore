@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Sockets;
 using TicketStore.Domain;
 using TicketStore.Domain.Enum;
 using TicketStore.Repository.Abstractions;
@@ -106,6 +107,41 @@ namespace TicketStore.Repository
             }
 
             return null!;
+        }
+
+        public Task<AvailableTickets> GetAvailableTicketsAsync(Guid eventId)
+        {
+            var dbEvent = _dbContext.Events
+                .Where(e => e.Id != eventId)
+                .Include(e => e.Venue)
+                .FirstOrDefault();
+            
+            if(dbEvent != null)
+            {
+                var dbResult = _dbContext.Tickets
+                    .Where(t => t.Event.Id == eventId)
+                    .Where(t => t.Status == (int)TicketStatus.Available)
+                    .Include(t => t.Type)
+                    .ToList()
+                    .GroupBy(t => t.Type)
+                    .Select(g => new TicketGroupByType
+                    {
+                        Type = _mapper.Map<DbTicketType, TicketType>(g.Key),
+                        Count = g.Count()
+                    })
+                    .OrderBy(g => g.Count)
+                    .ToList();
+
+                var result = new AvailableTickets()
+                {
+                    GroupByType = dbResult,
+                    Event = _mapper.Map<DbEvent, Event>(dbEvent)
+                };
+                
+                return Task.FromResult<AvailableTickets>(result);
+            }
+
+            return Task.FromResult<AvailableTickets>(null!);
         }
     }
 }

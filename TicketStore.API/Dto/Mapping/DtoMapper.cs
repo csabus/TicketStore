@@ -58,6 +58,9 @@ namespace TicketStore.API.DTO.Mapping
                     opt => opt.MapFrom(t => new TicketType() { Id = t.TicketTypeId!.Value }));
 
             CreateMap<Ticket, TicketDetails>();
+
+            CreateMap<TicketGroupByType, TicketGroupByTypeDetails>();
+            CreateMap<AvailableTickets, AvailableTicketsDetails>();
         }
     }
 }

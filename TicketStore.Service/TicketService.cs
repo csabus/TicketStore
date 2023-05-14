@@ -32,5 +32,10 @@ namespace TicketStore.Service
         {
             return _ticketRepository.ValidateAsync(ticketId, eventId);
         }
+
+        public Task<AvailableTickets> GetAvailableTicketsAsync(Guid eventId)
+        {
+            return _ticketRepository.GetAvailableTicketsAsync(eventId);
+        }
     }
 }
