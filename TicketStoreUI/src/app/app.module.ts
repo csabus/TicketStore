@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 
-import { StoreModule, Store } from '@ngrx/store';
+import {StoreModule} from '@ngrx/store';
 
-//import {store} from "./shared/store";
-import { reducers } from './shared/store';
+import {reducers} from './shared/store';
 
-import { MyCounterComponent } from '../counter/my-counter/my-counter.component';
+import {MyCounterComponent} from '../counter/my-counter/my-counter.component';
+import {SharedModule} from "./shared/shared.module";
 import {AuthModule} from "./auth/auth.module";
 
 @NgModule({
@@ -20,10 +20,12 @@ import {AuthModule} from "./auth/auth.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
     AuthModule,
     StoreModule.forRoot(reducers)
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
