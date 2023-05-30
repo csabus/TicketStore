@@ -1,0 +1,9 @@
+<!--suppress AngularUndefinedBinding -->
+<mat-toolbar color="primary">
+  <span>TicketStore</span>
+  <span class="spacer"></span>
+  <button mat-button>Venues</button>
+  <button mat-button>Events</button>
+  <button mat-button *ngIf="!(isLoggedIn$ | async)">Login</button>
+  <button mat-button *ngIf="isLoggedIn$ | async">Logout</button>
+</mat-toolbar>

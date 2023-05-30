@@ -9,8 +9,9 @@ import {StoreModule} from '@ngrx/store';
 import {reducers} from './shared/store';
 
 import {MyCounterComponent} from '../counter/my-counter/my-counter.component';
-import {SharedModule} from "./shared/shared.module";
 import {AuthModule} from "./auth/auth.module";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NavigationModule} from "./navigation/navigation.module";
 
 @NgModule({
   declarations: [
@@ -20,9 +21,10 @@ import {AuthModule} from "./auth/auth.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
+    NavigationModule,
     AuthModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
