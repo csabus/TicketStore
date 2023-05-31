@@ -4,15 +4,18 @@ import {createSelector} from "@ngrx/store";
 
 import * as fromCounter from './reducers/counter.reducer';
 import * as fromAuth from './reducers/auth.reducers';
+import * as fromUI from './reducers/ui.reducers';
 
 export interface State {
   counter: fromCounter.State
-  auth: fromAuth.State
+  auth: fromAuth.State,
+  ui: fromUI.State
 };
 
 export const reducers = {
   counter: fromCounter.reducer,
-  auth: fromAuth.reducer
+  auth: fromAuth.reducer,
+  ui: fromUI.reducer
 }
 
 /*export function store(state: any, action: any) {
@@ -28,5 +31,9 @@ export const getAuthLoaded = createSelector(getAuthState, fromAuth.getLoaded);
 export const getAuthLoading = createSelector(getAuthState, fromAuth.getLoading);
 export const getAuthFailed = createSelector(getAuthState, fromAuth.getFailed);
 export const getLoggedUser = createSelector(getAuthState, fromAuth.getLoggedUser);
+
+export const getUIState = (state: State) => state.ui;
+export const getUILoading = createSelector(getUIState, fromUI.getLoading);
+
 
 

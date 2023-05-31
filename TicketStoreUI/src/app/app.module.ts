@@ -12,6 +12,7 @@ import {MyCounterComponent} from '../counter/my-counter/my-counter.component';
 import {AuthModule} from "./auth/auth.module";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavigationModule} from "./navigation/navigation.module";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {NavigationModule} from "./navigation/navigation.module";
     NavigationModule,
     AuthModule,
     StoreModule.forRoot(reducers),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

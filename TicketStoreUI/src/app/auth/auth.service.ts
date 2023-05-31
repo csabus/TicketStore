@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Store} from "@ngrx/store";
 import * as store from "../shared/store";
 import * as authActions from '../shared/store/actions/auth.actions';
+import * as uiActions from '../shared/store/actions/ui.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,10 @@ export class AuthService {
   }
 
   login() {
+    this.store$.dispatch(uiActions.DoStartLoading());
+    setTimeout(() => {
+      this.store$.dispatch(uiActions.DoStopLoading())
+    }, 2000);
     this.store$.dispatch(authActions.DoLogin());
   }
 
