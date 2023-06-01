@@ -4,23 +4,28 @@ import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {LoadingScreenComponent} from './loading-screen/loading-screen.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {UiMessagesComponent} from './ui-messages/ui-messages.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
-    LoadingScreenComponent
+    LoadingScreenComponent,
+    UiMessagesComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    LoadingScreenComponent
+    LoadingScreenComponent,
+    UiMessagesComponent
   ]
 })
 export class SharedModule {

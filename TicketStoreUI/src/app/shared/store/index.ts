@@ -34,6 +34,7 @@ export const getLoggedUser = createSelector(getAuthState, fromAuth.getLoggedUser
 
 export const getUIState = (state: State) => state.ui;
 export const getUILoading = createSelector(getUIState, fromUI.getLoading);
+export const getUIMessage = createSelector(getUIState, fromUI.getMessage);
 
 
 
