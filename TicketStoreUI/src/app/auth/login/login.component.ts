@@ -1,8 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from "../auth.service";
-import * as uiActions from '../../shared/store/actions/ui.actions';
-import * as store from '../../shared/store'
-import {Store} from "@ngrx/store";
+import {UiMessagesService} from "../../shared/ui-messages/ui-messages.service";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +9,8 @@ import {Store} from "@ngrx/store";
 })
 export class LoginComponent {
 
-  constructor(private readonly authService: AuthService, private readonly store$: Store<store.State>) {
+  constructor(private readonly authService: AuthService,
+              private readonly uiMessageService: UiMessagesService) {
   }
 
   onLogin() {
@@ -30,6 +29,6 @@ export class LoginComponent {
   }
 
   onShowMessage() {
-    this.store$.dispatch(uiActions.DoShowMessage({message: 'Test message', action: 'Ok', duration: 2000}));
+    this.uiMessageService.showMessage('Test message', 'Ok', 2000);
   }
 }

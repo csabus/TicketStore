@@ -1,31 +1,34 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Store} from "@ngrx/store";
-import * as store from '../store';
+import {UiMessagesService} from "./ui-messages.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-ui-messages',
   templateUrl: './ui-messages.component.html',
   styleUrls: ['./ui-messages.component.css']
 })
-export class UiMessagesComponent implements OnInit {
 
-  uiMessage$ = this.store$.select(store.getUIMessage);
+export class UiMessagesComponent implements OnInit, OnDestroy {
 
-  constructor(private readonly _snackBar: MatSnackBar,
-              private readonly store$: Store<store.State>) {
+  private uiMessageServiceSubscription: Subscription | undefined;
+
+  constructor(private readonly snackBar: MatSnackBar,
+              private readonly uiMessagesService: UiMessagesService) {
   }
 
   ngOnInit(): void {
-    this.uiMessage$.subscribe((uiMessage) => {
-      if (uiMessage != null) {
-        if (uiMessage.duration && uiMessage.duration > 0) {
-          this._snackBar.open(uiMessage.message, uiMessage.action, {duration: uiMessage.duration});
-        } else {
-          this._snackBar.open(uiMessage.message, uiMessage.action);
-        }
+    this.uiMessageServiceSubscription = this.uiMessagesService.showMessageEvent.subscribe((uiMessage) => {
+      if (uiMessage.duration && uiMessage.duration > 0) {
+        this.snackBar.open(uiMessage.message, uiMessage.action, {duration: uiMessage.duration});
+      } else {
+        this.snackBar.open(uiMessage.message, uiMessage.action);
       }
-    })
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.uiMessageServiceSubscription?.unsubscribe();
   }
 
 }
