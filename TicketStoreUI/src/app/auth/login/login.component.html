@@ -4,3 +4,23 @@
 <button (click)="onLogout()">Logout</button>
 
 <button mat-stroked-button (click)="onShowMessage()">Show message</button>
+
+<mat-card>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <p>
+      <mat-form-field>
+        <mat-label>User name</mat-label>
+        <input matInput formControlName="username"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password"/>
+      </mat-form-field>
+    </p>
+    <p>
+      <button type="submit" mat-raised-button color="primary">Login</button>
+    </p>
+  </form>
+</mat-card>

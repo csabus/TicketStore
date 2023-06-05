@@ -1,11 +1,13 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from '@angular/common';
-import {FormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {LoadingScreenComponent} from './loading-screen/loading-screen.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {UiMessagesComponent} from './ui-messages/ui-messages.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -14,18 +16,22 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
   ],
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule,
+    MatFormFieldModule,
   ],
   exports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
     LoadingScreenComponent,
-    UiMessagesComponent
+    UiMessagesComponent,
+    MatCardModule,
+    MatFormFieldModule,
   ]
 })
 export class SharedModule {

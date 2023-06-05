@@ -1,5 +1,7 @@
 import {NgModule} from '@angular/core';
 import {LoginComponent} from './login/login.component';
+import {SharedModule} from "../shared/shared.module";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -9,7 +11,10 @@ import {LoginComponent} from './login/login.component';
   exports: [
     LoginComponent
   ],
-  imports: []
+  imports: [
+    SharedModule,
+    MatInputModule,
+  ]
 })
 export class AuthModule {
 }
