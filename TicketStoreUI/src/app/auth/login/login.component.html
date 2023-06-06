@@ -1,12 +1,14 @@
+<!--
 <p>login works!</p>
 <button (click)="onLogin()">Login</button>
 <button (click)="onLoginSuccess()">LoginSuccess</button>
 <button (click)="onLogout()">Logout</button>
 
 <button mat-stroked-button (click)="onShowMessage()">Show message</button>
-
-<mat-card>
-  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+-->
+<div class="content">
+  <h1>Login</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
     <p>
       <mat-form-field>
         <mat-label>User name</mat-label>
@@ -19,8 +21,6 @@
         <input matInput type="password" formControlName="password"/>
       </mat-form-field>
     </p>
-    <p>
-      <button type="submit" mat-raised-button color="primary">Login</button>
-    </p>
+    <button type="submit" mat-button color="primary">Login</button>
   </form>
-</mat-card>
+</div>
