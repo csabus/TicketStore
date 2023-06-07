@@ -8,6 +8,8 @@ import {UiMessagesComponent} from './ui-messages/ui-messages.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {HttpClientModule} from "@angular/common/http";
+
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatSnackBarModule,
     MatCardModule,
     MatFormFieldModule,
+    HttpClientModule
   ],
   exports: [
     CommonModule,
@@ -32,6 +35,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     UiMessagesComponent,
     MatCardModule,
     MatFormFieldModule,
+    HttpClientModule
   ]
 })
 export class SharedModule {

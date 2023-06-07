@@ -1,9 +1,9 @@
 <!--suppress AngularUndefinedBinding -->
 <mat-toolbar color="primary">
-  <span>TicketStore</span>
+  <span><a mat-button routerLink="/" routerLinkActive="active">TicketStore</a></span>
   <span class="spacer"></span>
   <button mat-button>Venues</button>
   <button mat-button>Events</button>
-  <button mat-button *ngIf="!(isLoggedIn$ | async)">Login</button>
-  <button mat-button *ngIf="isLoggedIn$ | async">Logout</button>
+  <a mat-button routerLink="/login" routerLinkActive="active" *ngIf="!(isLoggedIn$ | async)">Login</a>
+  <a (click)="logout()" mat-button *ngIf="isLoggedIn$ | async">Logout</a>
 </mat-toolbar>

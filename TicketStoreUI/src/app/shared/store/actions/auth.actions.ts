@@ -1,5 +1,5 @@
 import {createAction, props} from "@ngrx/store";
-import {User} from "../../models";
+import {UserModel} from "../../models";
 
 export const ActionTypes = {
   DO_LOGIN: '[Auth] Do Login',
@@ -11,7 +11,7 @@ export const ActionTypes = {
 };
 
 export const DoLogin = createAction(ActionTypes.DO_LOGIN);
-export const DoLoginSuccess = createAction(ActionTypes.DO_LOGIN_SUCCESS, props<User>());
+export const DoLoginSuccess = createAction(ActionTypes.DO_LOGIN_SUCCESS, props<UserModel>());
 export const DoLoginFail = createAction(ActionTypes.DO_LOGIN_FAIL);
 export const DoLogout = createAction(ActionTypes.DO_LOGOUT);
 export const DoLogoutSuccess = createAction(ActionTypes.DO_LOGOUT_SUCCESS);

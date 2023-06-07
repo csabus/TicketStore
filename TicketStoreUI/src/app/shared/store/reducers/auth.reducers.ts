@@ -1,12 +1,12 @@
 import {createReducer, on} from "@ngrx/store";
 import * as actions from '../actions/auth.actions';
-import {User} from '../../models';
+import {UserModel} from '../../models';
 
 export interface State {
   loading: boolean;
   loaded: boolean;
   failed: boolean;
-  user: User | null;
+  user: UserModel | null;
 };
 
 const INITIAL_STATE: State = {
@@ -19,13 +19,14 @@ const INITIAL_STATE: State = {
 export const reducer = createReducer(
   INITIAL_STATE,
   on(actions.DoLogin, (state) => ({...state, loading: true, loaded: false, failed: false})),
-  on(actions.DoLogout, (state) => ({...state, loading: true, loaded: false, failed: false})),
+  on(actions.DoLogout, (state) => ({...INITIAL_STATE})),
   on(actions.DoLoginSuccess, (state, action) => {
-      console.log(action);
       return {
         loading: false, loaded: true, failed: false, user: {
-          id: '1',
-          userName: 'username'
+          username: action.username,
+          email: action.email,
+          fullname: action.fullname,
+          token: action.token
         }
       }
     }

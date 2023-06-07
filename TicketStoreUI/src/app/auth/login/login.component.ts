@@ -3,6 +3,7 @@ import {AuthService} from "../auth.service";
 import {UiMessagesService} from "../../shared/ui-messages/ui-messages.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginModel} from "../../shared/models";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private readonly authService: AuthService,
               private readonly formBuilder: FormBuilder,
-              private readonly uiMessageService: UiMessagesService) {
+              private readonly uiMessageService: UiMessagesService,
+              private readonly router: Router) {
   }
 
   ngOnInit(): void {
@@ -30,7 +32,11 @@ export class LoginComponent implements OnInit {
       this.authService.login({
         username: this.loginForm.value.username,
         password: this.loginForm.value.password
-      })
+      }).subscribe((user) => {
+        if (user) {
+          this.router.navigate(['']).then();
+        }
+      });
     }
   }
 

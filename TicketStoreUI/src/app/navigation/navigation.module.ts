@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {HeaderComponent} from './header/header.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {SharedModule} from "../shared/shared.module";
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
 
 @NgModule({
@@ -15,7 +16,9 @@ import {SharedModule} from "../shared/shared.module";
   imports: [
     CommonModule,
     MatToolbarModule,
-    SharedModule
+    SharedModule,
+    RouterLink,
+    RouterLinkActive
   ]
 })
 export class NavigationModule {

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Store} from "@ngrx/store";
 import * as store from "../../shared/store";
-import * as authActions from '../../shared/store/actions/auth.actions';
+import {AuthService} from "../../auth/auth.service";
 
 
 @Component({
@@ -13,7 +13,12 @@ export class HeaderComponent {
 
   isLoggedIn$ = this.store$.select(store.getAuthLoaded);
 
-  constructor(private store$: Store<store.State>) {
+  constructor(private readonly store$: Store<store.State>,
+              private readonly authService: AuthService) {
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }
