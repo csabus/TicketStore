@@ -6,8 +6,10 @@
         
         public string? Email { get; set; }
         
-        public string? Fullname { get; set; }
+        public string? FullName { get; set; }
 
         public string? Token { get; set; }
+
+        public ICollection<String> Roles { get; set; } = new List<String>();
     }
 }

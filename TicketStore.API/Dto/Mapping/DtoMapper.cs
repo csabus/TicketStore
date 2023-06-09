@@ -22,6 +22,9 @@ namespace TicketStore.API.DTO.Mapping
 
             CreateMap<RegisterUserRequest, ApplicationUser>();
             CreateMap<ApplicationUser, AuthenticatedUser>();
+
+            CreateMap<ApplicationRole, string>()
+                .ConvertUsing(a => a.NormalizedName!);
             
             CreateMap<CreateVenueRequest, Venue>();
             CreateMap<UpdateVenueRequest, Venue>();

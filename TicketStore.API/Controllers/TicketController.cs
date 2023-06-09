@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TicketStore.API.ActionFilters;
-using TicketStore.API.Dto;
 using TicketStore.API.Dto.Ticket;
 using TicketStore.Domain;
 using TicketStore.Service.Abstractions;

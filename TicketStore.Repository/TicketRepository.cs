@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Sockets;
 using TicketStore.Domain;
 using TicketStore.Domain.Enum;
 using TicketStore.Repository.Abstractions;
