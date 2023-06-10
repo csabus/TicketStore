@@ -14,11 +14,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NavigationModule} from "./navigation/navigation.module";
 import {SharedModule} from "./shared/shared.module";
 import {HomeModule} from "./home/home.module";
+import {ProfileComponent} from "./profile/profile/profile.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     MyCounterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

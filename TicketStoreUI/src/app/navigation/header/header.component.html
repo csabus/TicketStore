@@ -2,8 +2,17 @@
 <mat-toolbar color="primary">
   <span><a mat-button routerLink="/" routerLinkActive="active">TicketStore</a></span>
   <span class="spacer"></span>
-  <button mat-button>Venues</button>
+  <button mat-button routerLink="/venues" routerLinkActive="active">Venues</button>
   <button mat-button>Events</button>
   <a mat-button routerLink="/login" routerLinkActive="active" *ngIf="!(isLoggedIn$ | async)">Login</a>
-  <a (click)="logout()" mat-button *ngIf="isLoggedIn$ | async">Logout</a>
+  <ng-container *ngIf="isLoggedIn$ | async">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <span mat-menu-item>{{(user$ | async)?.fullName}}</span>
+      <a mat-menu-item routerLink="/profile">Profile</a>
+      <a mat-menu-item (click)="logout()">Logout</a>
+    </mat-menu>
+  </ng-container>
 </mat-toolbar>

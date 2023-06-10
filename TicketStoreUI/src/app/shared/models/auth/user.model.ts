@@ -1,6 +1,9 @@
+import {Role} from "./role.enum";
+
 export interface UserModel {
   username: string,
   email?: string,
-  fullname?: string,
-  token?: string
+  fullName?: string,
+  token?: string,
+  roles: string[]
 }

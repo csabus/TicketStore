@@ -25,8 +25,9 @@ export const reducer = createReducer(
         loading: false, loaded: true, failed: false, user: {
           username: action.username,
           email: action.email,
-          fullname: action.fullname,
-          token: action.token
+          fullName: action.fullName,
+          token: action.token,
+          roles: action.roles
         }
       }
     }
@@ -40,4 +41,6 @@ export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;
 export const getFailed = (state: State) => state.failed;
 export const getLoggedUser = (state: State) => state.user;
+export const getToken = (state: State) => state.user?.token;
+export const getRoles = (state: State) => state.user?.roles;
 

@@ -9,6 +9,7 @@ import * as uiActions from '../shared/store/actions/ui.actions';
 import {LoginModel, UserModel} from "../shared/models";
 import {environment} from "../../environments/environment";
 import {UiMessagesService} from "../shared/ui-messages/ui-messages.service";
+import {Role} from "../shared/models/auth/role.enum";
 
 @Injectable({
   providedIn: 'root'

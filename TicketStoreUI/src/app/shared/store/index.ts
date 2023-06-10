@@ -31,6 +31,8 @@ export const getAuthLoaded = createSelector(getAuthState, fromAuth.getLoaded);
 export const getAuthLoading = createSelector(getAuthState, fromAuth.getLoading);
 export const getAuthFailed = createSelector(getAuthState, fromAuth.getFailed);
 export const getLoggedUser = createSelector(getAuthState, fromAuth.getLoggedUser);
+export const getToken = createSelector(getAuthState, fromAuth.getToken);
+export const getRoles = createSelector(getAuthState, fromAuth.getRoles);
 
 export const getUIState = (state: State) => state.ui;
 export const getUILoading = createSelector(getUIState, fromUI.getLoading);

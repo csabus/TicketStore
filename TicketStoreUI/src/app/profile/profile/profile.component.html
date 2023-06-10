@@ -1,0 +1,5 @@
+<p>{{ (user$ | async)?.fullName }}</p>
+<p>Roles:</p>
+<ul>
+  <li *ngFor="let role of (user$ | async)?.roles">{{ role }}</li>
+</ul>
