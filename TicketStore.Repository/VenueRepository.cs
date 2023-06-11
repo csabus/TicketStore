@@ -59,9 +59,9 @@ namespace TicketStore.Repository
         public Task<Domain.PagedResult<Venue>> GetPagedAsync(Paging paging)
         {
             var dbVenueList = _dbContext.Venues
+                .OrderBy(paging.GetOrderByString("name"))
                 .Skip(paging.Page * paging.PageSize)
                 .Take(paging.PageSize)
-                .OrderBy(paging.GetOrderByString("name"))
                 .ToList();
             var pagedResult = new Domain.PagedResult<Venue>
             {
