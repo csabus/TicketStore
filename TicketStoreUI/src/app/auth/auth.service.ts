@@ -1,29 +1,31 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {catchError, Observable, of} from "rxjs";
-import {map} from 'rxjs/operators';
-import {Store} from "@ngrx/store";
-import * as store from "../shared/store";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import * as store from '../shared/store';
 import * as authActions from '../shared/store/actions/auth.actions';
 import * as uiActions from '../shared/store/actions/ui.actions';
-import {LoginModel, UserModel} from "../shared/models";
-import {environment} from "../../environments/environment";
-import {UiMessagesService} from "../shared/ui-messages/ui-messages.service";
-import {Role} from "../shared/models/auth/role.enum";
+import { LoginModel, UserModel } from '../shared/models';
+import { environment } from '../../environments/environment';
+import { UiMessagesService } from '../shared/ui-messages/ui-messages.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  constructor(private readonly store$: Store<store.State>,
-              private readonly http: HttpClient,
-              private readonly uiMessageService: UiMessagesService) {
+  constructor(
+    private readonly store$: Store<store.State>,
+    private readonly http: HttpClient,
+    private readonly uiMessageService: UiMessagesService
+  ) {
     this.loadUserFromLocalStorage();
   }
 
   private loadUserFromLocalStorage() {
-    const user = JSON.parse(localStorage.getItem('ticket-store-user') ?? '{}') as UserModel;
+    const user = JSON.parse(
+      localStorage.getItem('ticket-store-user') ?? '{}'
+    ) as UserModel;
     if (user.username) {
       this.store$.dispatch(authActions.DoLoginSuccess(user));
     }
@@ -41,10 +43,14 @@ export class AuthService {
           localStorage.setItem('ticket-store-user', JSON.stringify(user));
           return user;
         }),
-        catchError(error => {
+        catchError((error) => {
           this.store$.dispatch(authActions.DoLoginFail());
           this.store$.dispatch(uiActions.DoStopLoading());
-          this.uiMessageService.showMessage("Authentication failed", "Ok", 5000);
+          this.uiMessageService.showMessage(
+            'Authentication failed',
+            'Ok',
+            5000
+          );
           return of(null);
         })
       );

@@ -1,0 +1,9 @@
+<p>venues works!</p>
+
+
+<mat-paginator [length]="pagingSettings.length"
+               [pageSize]="pagingSettings.pageSize"
+               [pageSizeOptions]="pagingSettings.pageSizeOptions"
+               [pageIndex]="pagingSettings.pageIndex"
+               (page)="onPageEvent($event)">
+</mat-paginator>

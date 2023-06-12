@@ -1,27 +1,24 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
-import {StoreModule} from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 
-import {reducers} from './shared/store';
+import { reducers } from './shared/store';
 
-import {MyCounterComponent} from '../counter/my-counter/my-counter.component';
-import {AuthModule} from "./auth/auth.module";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NavigationModule} from "./navigation/navigation.module";
-import {SharedModule} from "./shared/shared.module";
-import {HomeModule} from "./home/home.module";
-import {ProfileComponent} from "./profile/profile/profile.component";
+import { MyCounterComponent } from '../counter/my-counter/my-counter.component';
+import { AuthModule } from './auth/auth.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavigationModule } from './navigation/navigation.module';
+import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './home/home.module';
+import { ProfileComponent } from './profile/profile/profile.component';
+import { VenuesModule } from './venues/venues.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MyCounterComponent,
-    ProfileComponent
-  ],
+  declarations: [AppComponent, MyCounterComponent, ProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,10 +27,10 @@ import {ProfileComponent} from "./profile/profile/profile.component";
     StoreModule.forRoot(reducers),
     BrowserAnimationsModule,
     SharedModule,
-    HomeModule
+    HomeModule,
+    VenuesModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
