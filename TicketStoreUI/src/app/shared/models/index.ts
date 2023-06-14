@@ -3,7 +3,7 @@ export * from './auth/login.model';
 export * from './auth/role.enum';
 export * from './shared/address-model';
 export * from './shared/paged-result.model';
-export * from './shared/paging-request.model';
+export * from './shared/paging-request-model';
 export * from './shared/ui-message.model';
 export * from './shared/paging-settings-model';
 export * from './venue/venue.model';

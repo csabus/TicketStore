@@ -1,4 +1,4 @@
-export interface PagingRequestModel {
+export interface PagingRequest {
   page: number;
   pageSize: number;
   orderBy: string;

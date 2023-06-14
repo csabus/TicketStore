@@ -1,4 +1,4 @@
-export interface PagedResultModel<T> {
+export interface PagedResult<T> {
   result: T[];
   totalCount: number;
   page: number;

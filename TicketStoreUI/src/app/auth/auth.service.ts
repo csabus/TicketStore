@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import * as store from '../shared/store';
-import * as authActions from '../shared/store/actions/auth.actions';
-import * as uiActions from '../shared/store/actions/ui.actions';
-import { LoginModel, UserModel } from '../shared/models';
+import * as store from '@store';
+import * as authActions from '@store/actions/auth.actions';
+import * as uiActions from '@store/actions/ui.actions';
+import { LoginModel, UserModel } from '@models';
 import { environment } from '../../environments/environment';
 import { UiMessagesService } from '../shared/ui-messages/ui-messages.service';
 

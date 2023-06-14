@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { VenueService } from '../venue.service';
-import { PagingRequestModel } from '../../shared/models';
-import { PagingSettings } from '../../shared/models';
-import { ModelBuilder } from '../../shared/models/model-builder';
+import { PagingRequest, PagingSettings } from '@models';
+import { ModelBuilder } from '@models/model-builder';
 
 @Component({
   selector: 'app-venues',
@@ -20,7 +19,7 @@ export class VenuesComponent implements OnInit {
   }
 
   loadVenues(): void {
-    const pagingRequest: PagingRequestModel = {
+    const pagingRequest: PagingRequest = {
       page: this.pagingSettings.pageIndex,
       pageSize: this.pagingSettings.pageSize,
       orderBy: this.pagingSettings.orderBy,

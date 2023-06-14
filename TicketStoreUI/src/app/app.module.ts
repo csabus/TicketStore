@@ -6,19 +6,18 @@ import { AppComponent } from './app.component';
 
 import { StoreModule } from '@ngrx/store';
 
-import { reducers } from './shared/store';
+import { reducers } from '@store';
 
-import { MyCounterComponent } from '../counter/my-counter/my-counter.component';
 import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationModule } from './navigation/navigation.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
-import { ProfileComponent } from './profile/profile/profile.component';
 import { VenuesModule } from './venues/venues.module';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
-  declarations: [AppComponent, MyCounterComponent, ProfileComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,6 +28,7 @@ import { VenuesModule } from './venues/venues.module';
     SharedModule,
     HomeModule,
     VenuesModule,
+    ProfileModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

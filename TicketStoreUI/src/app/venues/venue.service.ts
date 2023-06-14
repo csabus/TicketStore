@@ -4,10 +4,8 @@ import * as uiActions from '../shared/store/actions/ui.actions';
 import { environment } from '../../environments/environment';
 import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
-import { PagingRequestModel } from '../shared/models';
+import { PagingRequest, PagedResult, VenueModel } from '@models';
 import { Observable, tap } from 'rxjs';
-import { PagedResultModel } from '../shared/models';
-import { VenueModel } from '../shared/models/';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +16,7 @@ export class VenueService {
     private readonly http: HttpClient
   ) {}
 
-  getAll(paging: PagingRequestModel): Observable<PagedResultModel<VenueModel>> {
+  getAll(paging: PagingRequest): Observable<PagedResult<VenueModel>> {
     this.store$.dispatch(uiActions.DoStartLoading());
     const url =
       `${environment.api.url}/venue?` +
@@ -27,7 +25,7 @@ export class VenueService {
       `orderBy=${paging.orderBy}&` +
       `isDescending=${paging.isDescending}`;
     return this.http
-      .get<PagedResultModel<VenueModel>>(url)
+      .get<PagedResult<VenueModel>>(url)
       .pipe(tap(() => this.store$.dispatch(uiActions.DoStopLoading())));
   }
 }
