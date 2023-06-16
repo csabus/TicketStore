@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { VenueService } from '../venue.service';
-import { PagingRequest, PagingSettings } from '@models';
+import { PagingRequest, PagingSettings, VenueModel } from '@models';
 import { ModelBuilder } from '@models/model-builder';
 
 @Component({
@@ -11,6 +11,7 @@ import { ModelBuilder } from '@models/model-builder';
 })
 export class VenuesComponent implements OnInit {
   pagingSettings: PagingSettings = ModelBuilder.PagingSettings();
+  venueList: VenueModel[] = [];
 
   constructor(private readonly venueService: VenueService) {}
 
@@ -30,6 +31,7 @@ export class VenuesComponent implements OnInit {
       this.pagingSettings.pageSize = result.pageSize;
       this.pagingSettings.length = result.totalCount;
       console.log(result);
+      this.venueList = result.result;
     });
   }
 

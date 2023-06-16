@@ -1,9 +1,22 @@
-<p>venues works!</p>
-
+<mat-card *ngFor="let venue of venueList" class="venue-card">
+  <mat-card-header>
+    <mat-card-title>{{venue.name}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{venue.description}}</p>
+    <p>{{venue.address.country}}, {{venue.address.zipCode}}, {{venue.address.city}}, {{venue.address.street}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>EDIT</button>
+    <button mat-button>EVENTS</button>
+    <button mat-button>NEW EVENT</button>
+  </mat-card-actions>
+</mat-card>
 
 <mat-paginator [length]="pagingSettings.length"
                [pageSize]="pagingSettings.pageSize"
                [pageSizeOptions]="pagingSettings.pageSizeOptions"
                [pageIndex]="pagingSettings.pageIndex"
-               (page)="onPageEvent($event)">
+               (page)="onPageEvent($event)"
+               class="venue-paginator">
 </mat-paginator>
