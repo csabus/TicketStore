@@ -5,11 +5,11 @@ import { PagingRequest, PagingSettings, VenueModel } from '@models';
 import { ModelBuilder } from '@models/model-builder';
 
 @Component({
-  selector: 'app-venues',
-  templateUrl: './venues.component.html',
-  styleUrls: ['./venues.component.css'],
+  selector: 'app-venue-list',
+  templateUrl: './venue-list.component.html',
+  styleUrls: ['./venue-list.component.css'],
 })
-export class VenuesComponent implements OnInit {
+export class VenueListComponent implements OnInit {
   pagingSettings: PagingSettings = ModelBuilder.PagingSettings();
   venueList: VenueModel[] = [];
 

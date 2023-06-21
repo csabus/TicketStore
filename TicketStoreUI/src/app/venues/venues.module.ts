@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
-import { VenuesComponent } from './venues/venues.component';
+import { VenueListComponent } from './venue-list/venue-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { VenueEventsComponent } from './venue-events/venue-events.component';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
-  declarations: [VenuesComponent],
-  exports: [VenuesComponent],
-  imports: [CommonModule, MatPaginatorModule, SharedModule],
+  declarations: [VenueListComponent, VenueEventsComponent],
+  exports: [VenueListComponent],
+  imports: [CommonModule, MatPaginatorModule, SharedModule, RouterLink],
 })
 export class VenuesModule {}

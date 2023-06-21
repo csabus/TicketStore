@@ -7,8 +7,8 @@
     <p>{{venue.address.country}}, {{venue.address.zipCode}}, {{venue.address.city}}, {{venue.address.street}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>EDIT</button>
-    <button mat-button>EVENTS</button>
+    <a [routerLink]="[venue.id]" mat-button>DETAILS</a>
+    <a [routerLink]="[venue.id, 'events']" mat-button>EVENTS</a>
     <button mat-button>NEW EVENT</button>
   </mat-card-actions>
 </mat-card>
