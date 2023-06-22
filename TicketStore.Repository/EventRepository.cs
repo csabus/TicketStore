@@ -81,5 +81,45 @@ namespace TicketStore.Repository
             };
             return Task.FromResult(pagedResult);
         }
+
+        public Task<Domain.PagedResult<Event>> GetFilteredAsync(Paging paging, EventFilter filter)
+        {
+            IQueryable<DbEvent> dbEventList = _dbContext.Events;
+            if (filter.DateFrom != null)
+            {
+                dbEventList = dbEventList.Where(e => DateTime.Compare(e.DateTime, (DateTime)filter.DateFrom) >= 0);
+            }
+            if (filter.DateTo != null)
+            {
+                dbEventList = dbEventList.Where(e => DateTime.Compare(e.DateTime, (DateTime)filter.DateTo) <= 0);
+            }
+            if(filter.VenueId != null)
+            {
+                dbEventList = dbEventList.Where(e => e.Venue.Id == filter.VenueId);
+            }
+            if (!string.IsNullOrWhiteSpace(filter.Title))
+            {
+                dbEventList = dbEventList.Where(e => e.Title.Contains(filter.Title));
+            }
+            if (!string.IsNullOrWhiteSpace(filter.Description))
+            {
+                dbEventList = dbEventList.Where(e => e.Description.Contains(filter.Description));
+            }
+            
+            var result = dbEventList
+                .OrderBy(paging.GetOrderByString("date_time"))
+                .Skip(paging.Page * paging.PageSize)
+                .Take(paging.PageSize)
+                .ToList();
+            
+            var pagedResult = new Domain.PagedResult<Event>
+            {
+                Result = _mapper.Map<List<DbEvent>, List<Event>>(result),
+                TotalCount = dbEventList.Count(),
+                Page = paging.Page,
+                PageSize = paging.PageSize
+            };
+            return Task.FromResult(pagedResult);
+        }
     }
 }

@@ -18,6 +18,11 @@ namespace TicketStore.Service
             return _eventRepository.CreateAsync(anEvent);
         }
 
+        public Task<Event> UpdateAsync(Event anEvent)
+        {
+            return _eventRepository.UpdateAsync(anEvent);
+        }
+
         public Task<Event> GetByIdAsync(Guid? id)
         {
             return _eventRepository.GetByIdAsync(id);
@@ -28,10 +33,11 @@ namespace TicketStore.Service
             return _eventRepository.GetPagedAsync(paging);
         }
 
-        public Task<Event> UpdateAsync(Event anEvent)
+        public Task<PagedResult<Event>> GetFilteredAsync(Paging paging, EventFilter filter)
         {
-            return _eventRepository.UpdateAsync(anEvent);
+            return _eventRepository.GetFilteredAsync(paging, filter);
         }
+
 
     }
 }

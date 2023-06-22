@@ -12,5 +12,7 @@ namespace TicketStore.Service.Abstractions
 
         public Task<PagedResult<Event>> GetPagedAsync(Paging paging);
 
+        public Task<PagedResult<Event>> GetFilteredAsync(Paging paging, EventFilter filter);
+
     }
 }

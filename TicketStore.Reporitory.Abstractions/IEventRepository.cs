@@ -11,5 +11,7 @@ namespace TicketStore.Repository.Abstractions
         public Task<Event> GetByIdAsync(Guid? id);
 
         public Task<PagedResult<Event>> GetPagedAsync(Paging paging);
+        
+        public Task<PagedResult<Event>> GetFilteredAsync(Paging paging, EventFilter filter);
     }
 }

@@ -81,6 +81,17 @@ namespace TicketStore.API.Controllers
 
             return _mapper.Map<PagedResult<Event>, PagedResult<EventDetails>>(result);
         }
+        
+        [HttpGet("filtered")]
+        public async Task<ActionResult<PagedResult<EventDetails>>> GetFiltered([FromQuery] EventFilterRequest? filterRequest)
+        {
+            var paging = _mapper.Map<PagingRequest, Paging>(filterRequest?.Paging ?? new PagingRequest());
+            var filter = _mapper.Map<EventFilterRequest, EventFilter>(filterRequest ?? new EventFilterRequest());
+
+            var result = await _eventService.GetFilteredAsync(paging, filter);
+
+            return _mapper.Map<PagedResult<Event>, PagedResult<EventDetails>>(result);
+        }
 
 
     }
