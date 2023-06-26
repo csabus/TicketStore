@@ -107,7 +107,7 @@ namespace TicketStore.Repository
             }
             
             var result = dbEventList
-                .OrderBy(paging.GetOrderByString("date_time"))
+                .OrderBy(paging.GetOrderByString("datetime"))
                 .Skip(paging.Page * paging.PageSize)
                 .Take(paging.PageSize)
                 .ToList();
