@@ -50,4 +50,12 @@ export class VenueService {
       .get<PagedResult<EventModel>>(url)
       .pipe(tap(() => this.store$.dispatch(uiActions.DoStopLoading())));
   }
+
+  getVenueDetails(id: string): Observable<VenueModel> {
+    this.store$.dispatch(uiActions.DoStartLoading());
+    const url = `${environment.api.url}/venue/${id}`;
+    return this.http
+      .get<VenueModel>(url)
+      .pipe(tap(() => this.store$.dispatch(uiActions.DoStopLoading())));
+  }
 }

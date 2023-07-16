@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PagingRequest, PagingSettings } from '@models';
+import { PagingRequest, PagingSettings, VenueModel } from '@models';
 import { ModelBuilder } from '@models/model-builder';
 import { EventModel } from '@models/event/event.model';
 import { VenueService } from '../venue.service';
@@ -14,6 +14,8 @@ import { EventFilterRequest } from '@models/event/event-filter-request.model';
 export class VenueEventsComponent implements OnInit {
   venueId = '';
   pagingSettings: PagingSettings = ModelBuilder.PagingSettings();
+
+  venue?: VenueModel;
   eventList: EventModel[] = [];
 
   constructor(
@@ -23,7 +25,14 @@ export class VenueEventsComponent implements OnInit {
 
   ngOnInit(): void {
     this.venueId = this.route.snapshot.params['id'];
+    this.loadVenue();
     this.loadEvents();
+  }
+
+  loadVenue(): void {
+    this.venueService
+      .getVenueDetails(this.venueId)
+      .subscribe((venue) => (this.venue = venue));
   }
 
   loadEvents(): void {
